@@ -1,1 +1,3 @@
-export { CommandInput } from "./CommandInput.component";
+import CommandInput from "./CommandInput.component";
+
+export { CommandInput };

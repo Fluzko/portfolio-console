@@ -1,6 +1,6 @@
 import { MetadataLine } from "../metadataLine";
 import { UserInputLine } from "../userInputLine";
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, Ref } from "react";
 import { IExecution, useFileSystem } from "../../contexts/fileSystem";
 import { CommandInput } from "../commadInput";
 import { Text } from "../text";
@@ -18,12 +18,14 @@ export const GenericPrompt: PromptComponent = ({ children, path }) => {
   );
 };
 
-export const ReadlinePrompt: FC = () => {
+export const ReadlinePrompt: FC<{ inputRef: Ref<{ focus: () => void }> }> = ({
+  inputRef,
+}) => {
   const { pwd, execute } = useFileSystem();
 
   return (
     <GenericPrompt path={pwd}>
-      <CommandInput onEnter={execute} />
+      <CommandInput onEnter={execute} ref={inputRef} />
     </GenericPrompt>
   );
 };
