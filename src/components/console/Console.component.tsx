@@ -2,7 +2,7 @@ import { ReadlinePrompt, TextPrompt } from "../prompt";
 import { useFileSystem } from "../../contexts/fileSystem";
 import { ConsoleContainer, MainContainer } from "./Console.styles";
 import { FC, useRef, useState } from "react";
-import { LoginAnimation } from "../loginAnimation";
+import { LoginAnimation } from "../LoginAnimation";
 
 type ConsoleComponent = FC;
 
