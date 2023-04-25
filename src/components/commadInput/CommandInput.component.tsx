@@ -6,7 +6,7 @@ type CommandInputComponent = {
 };
 
 export const CommandInput: FC<CommandInputComponent> = ({ onEnter }) => {
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleKeyDown = (e: any): void => {
