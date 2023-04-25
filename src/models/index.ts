@@ -2,7 +2,7 @@ type DirectoryMap = { [key: string]: Directory | null };
 
 export interface Directory {
   name: string;
-  ls: (dir?:string) => DirectoryMap | undefined;
+  ls: (dir?: string) => DirectoryMap | undefined;
 }
 
 export class Folder implements Directory {
@@ -12,7 +12,7 @@ export class Folder implements Directory {
   constructor(name: string, private parent?: Folder) {
     this.directories = {
       ".": this,
-      ...(this.parent && {"..": this.parent}),
+      ...(this.parent && { "..": this.parent }),
     };
     this.name = name;
   }
@@ -27,18 +27,19 @@ export class Folder implements Directory {
     this.directories[name] = new DirFile(name, content, this);
   }
 
-  ls(dir?:string):DirectoryMap | undefined {
-    if(!dir) return this.directories
+  ls(dir?: string): DirectoryMap | undefined {
+    if (!dir) return this.directories;
 
-    if(!this.directories[dir]) throw new Error(`ls: ${dir}: No such file or directory`)
+    if (!this.directories[dir])
+      throw new Error(`ls: ${dir}: No such file or directory`);
 
-    return this.directories[dir]?.ls()
+    return this.directories[dir]?.ls();
   }
 
-  cd(dir: string): Folder{
+  cd(dir: string): Folder {
     const childDir = this.directories[dir];
-    if(childDir instanceof Folder) return childDir
-    throw new Error("can't cd into a directory that's not a folder")
+    if (childDir instanceof Folder) return childDir;
+    throw new Error("can't cd into a directory that's not a folder");
   }
 
   pwd(): string {
@@ -46,9 +47,9 @@ export class Folder implements Directory {
     return `${this.parent.pwd()}/${this.name}`;
   }
 
-  getFile(fileName:string):DirFile |undefined{
-    const dir = this.directories[fileName]
-    if(dir instanceof DirFile) return dir
+  getFile(fileName: string): DirFile | undefined {
+    const dir = this.directories[fileName];
+    if (dir instanceof DirFile) return dir;
   }
 }
 
